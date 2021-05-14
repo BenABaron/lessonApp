@@ -3,11 +3,20 @@ const router = express.Router();
 const controller = require("../controller/lessonController");
 
 
-// Create Lesson - POST
-router.post('/createLesson', controller.createLesson);
+// Schedule Lesson - POST
+router.put('/scheduleLesson/:lesson_id', controller.scheduleLesson);
 
-// Edit Lesson - PUT
-router.put('/editLesson', controller.editLesson);
+// Edit Lesson Schedule - PUT
+router.put('/editLessonSchedule', controller.editLessonSchedule);
 
-// See all lessons - GET
-router.get('/lessons', controller.getAllLessons);
+// Add Schedule Exception - POST
+router.post('/addScheduleException', controller.addScheduleException);
+
+// Edit Schedule Exception - PUT
+router.put('/editScheduleException', controller.editScheduleException);
+
+// Get Schedule by Week (or whatever) - GET
+router.get('/getScheduleByWeek', controller.getScheduleByWeek);
+
+
+module.exports = router;

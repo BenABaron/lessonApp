@@ -21,10 +21,5 @@ router.delete('/deleteUser', controller.deleteUser);
 // Request Lesson - POST
 router.post('/requestLesson', controller.requestLesson);
 
-// TEACHERS ONLY
 
-// Set availability - POST
-router.post('/setAvailability', controller.setAvailability);
-
-// Edit availability
-router.put('/editAvailability', controller.editAvailability);
+module.exports = router;

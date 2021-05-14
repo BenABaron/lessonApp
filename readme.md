@@ -15,12 +15,27 @@ Teachers should be able to access all lessons
 
 ROUTES WE NEED
 
-Create User - POST
-Edit User - PUT
-Delete User - DELETE
-Login - POST
-Request Lesson - POST
+Create User - POST **
+Edit User - PUT **
+Delete User - DELETE **
+Login - POST **
 
-Create Lesson - POST
-Edit Lesson - PUT
-See all lessons - GET
+STUDENTS ONLY
+Request Lesson - POST **
+
+TEACHERS ONLY
+Set Availability - POST **
+Edit Availability - PUT **
+
+Schedule Lesson - POST 
+Edit Lesson Schedule - PUT
+Add Schedule Exception - POST
+Edit Schedule Exception - PUT
+Get Schedule by Week (or whatever) - GET
+
+WHAT YOU NEED FOR THE GRADE
+Model - Tables and databases
+Routes
+Backend setup - Routes set up and working
+Authentication
+Upload to Heroku
