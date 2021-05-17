@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const controller = require("../controller/userController");
+const checks = require("../controller/checks");
 
 // ALL USERS
 
@@ -9,17 +10,6 @@ router.post('/createUser', controller.createUser);
 
 // Login - POST
 router.post('/login', controller.loginUser);
-
-// Edit User - PUT
-router.put('/editUser', controller.editUser);
-
-// Delete User - DELETE
-router.delete('/deleteUser', controller.deleteUser);
-
-// STUDENTS ONLY
-
-// Request Lesson - POST
-router.post('/requestLesson', controller.requestLesson);
 
 
 module.exports = router;
