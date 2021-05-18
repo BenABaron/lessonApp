@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const controller = require("../controller/userController");
-const checks = require("../controller/checks");
+const checks = require("../middleware/checks");
 
 // ALL USERS
 

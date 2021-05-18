@@ -16,16 +16,13 @@ Teachers should be able to access all lessons
 ROUTES WE NEED
 
 Create User - POST **
-Edit User - PUT **
-Delete User - DELETE **
 Login - POST **
 
 STUDENTS ONLY
+
 Request Lesson - POST **
 
 TEACHERS ONLY
-Set Availability - POST **
-Edit Availability - PUT **
 
 Schedule Lesson - POST 
 Edit Lesson Schedule - PUT
