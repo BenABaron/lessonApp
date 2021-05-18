@@ -91,16 +91,23 @@ let requestLesson = function(req, res){
     } else if (is_recurring == false) {
       // If the lesson is not reccuring, the recurrance table does not need to be accessed, and instead we just insert into the lesson table.
 
-      let sqlStmt = 'insert into lessons values (lesson_id, ?, ?, ?, ?, ?, ?, ?, now(), false, null, null);'
-  
-      connection.query(sqlStmt, params, function(error){
-        if (error) {
-          console.error('error requesting a lesson. Error: ', error);
-          res.sendStatus(500);
-        }
-  
-        res.send('successfully requested a non recurring lesson!')
-      })
+      if (start_date == end_date) {
+
+        let sqlStmt = 'insert into lessons values (lesson_id, ?, ?, ?, ?, ?, ?, ?, now(), false, null, null);'
+    
+        connection.query(sqlStmt, params, function(error){
+          if (error) {
+            console.error('error requesting a lesson. Error: ', error);
+            res.sendStatus(500);
+          }
+    
+          res.send('successfully requested a non recurring lesson!')
+        })
+
+      } else {
+        res.send('Start and end date must be the same for a non-recurring lesson!')
+      }
+
     }
 
 
@@ -314,7 +321,25 @@ let addScheduleException = function(req, res){
 // Get Schedule by Week (or whatever) - GET
 let getScheduleByWeek = function(req, res){
   console.log('Inside my getScheduleByWeek /GET function', req.params);
-  res.send('success');
+
+  let sqlStmt = `select * from lessons l 
+  left join recurrance r
+  on l.lesson_id = r.recurrance_id
+  left join lesson_instance_exception e
+  on l.lesson_id = e.lesson_id
+  where l.start_date <= date(now())
+  and l.end_date >= date(now())
+  and l.is_accepted = true;`
+
+  connection.query(sqlStmt, function(error, rows){
+    if (error) {
+      console.error("Error retreiving lessons from db. Error: ", error);
+      res.sendStatus(400).send("Error retreiving lessons");
+    }
+
+    console.log(rows);
+    res.json(rows);
+  })
 }
 
 module.exports = {requestLesson, scheduleLesson, editNonRecurringLesson, updateRecurringLesson, addScheduleException, getScheduleByWeek};

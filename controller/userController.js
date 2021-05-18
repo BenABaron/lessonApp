@@ -15,13 +15,13 @@ const jwtSecret = process.env.JWT_SECRET;
 let createUser = function(req, res){
   console.log('Inside my createUser /POST function', req.body);
 
-  let firstName = req.body.firstName;
-  let lastName = req.body.lastName;
+  let first_name = req.body.first_name;
+  let last_name = req.body.last_name;
   let email = req.body.email;
   let password = req.body.password;
-  let confirmPassword = req.body.confirmPassword;
+  let confirm_password = req.body.confirm_password;
 
-  if (password != confirmPassword) {
+  if (password != confirm_password) {
     res.sendStatus(400).send("Passwords do not match");
   }
 
@@ -30,8 +30,8 @@ let createUser = function(req, res){
   let sqlStmt2 = 'insert into user_roles values (last_insert_id(), 3);'
 
   let params = [];
-  params.push(firstName);
-  params.push(lastName);
+  params.push(first_name);
+  params.push(last_name);
   params.push(email);
   params.push(passwordHash);
 
