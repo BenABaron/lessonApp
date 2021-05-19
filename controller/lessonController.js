@@ -319,8 +319,8 @@ let addScheduleException = function(req, res){
 }
 
 // Get Schedule by Week (or whatever) - GET
-let getScheduleByWeek = function(req, res){
-  console.log('Inside my getScheduleByWeek /GET function', req.params);
+let getScheduleToday = function(req, res){
+  console.log('Inside my getScheduleToday /GET function', req.params);
 
   let sqlStmt = `select * from lessons l 
   left join recurrance r
@@ -342,4 +342,4 @@ let getScheduleByWeek = function(req, res){
   })
 }
 
-module.exports = {requestLesson, scheduleLesson, editNonRecurringLesson, updateRecurringLesson, addScheduleException, getScheduleByWeek};
+module.exports = {requestLesson, scheduleLesson, editNonRecurringLesson, updateRecurringLesson, addScheduleException, getScheduleToday};

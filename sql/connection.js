@@ -23,6 +23,13 @@ class Connection {
 
 const instance = new Connection()
 
+instance.query('select now()', function(error, results){
+  if (error){
+    console.error("error. Test query to db ", error);
+  }
+  console.log('test query to db results', results);
+})
+
 
 
 module.exports = instance;

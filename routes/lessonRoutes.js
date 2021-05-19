@@ -19,7 +19,7 @@ router.post('/updateRecurringLesson/:lesson_id', [checks.checkJwt, checks.isTeac
 router.post('/addScheduleException/:lesson_id', [checks.checkJwt, checks.isTeacher], controller.addScheduleException);
 
 // Get Schedule by Week (or whatever) - GET
-router.get('/getScheduleByWeek', [checks.checkJwt, checks.isTeacher], controller.getScheduleByWeek);
+router.get('/getScheduleToday', [checks.checkJwt, checks.isTeacher], controller.getScheduleToday);
 
 
 module.exports = router;
