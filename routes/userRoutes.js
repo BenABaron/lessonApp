@@ -6,7 +6,7 @@ const checks = require("../middleware/checks");
 // ALL USERS
 
 // Create User - POST
-router.post('/createUser', controller.createUser);
+router.post('/createUser', [checks.checkJwt, checks.isAdmin], controller.createUser);
 
 // Login - POST
 router.post('/login', controller.loginUser);
