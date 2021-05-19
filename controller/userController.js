@@ -93,7 +93,7 @@ let loginUser = function(req, res){
     let role;
 
     if (err) {
-      console.error("Error when querying the db. Error: ", error);
+      console.error("Error when querying the db. Error: ", err);
     }
 
     if (rows.length > 1) {
