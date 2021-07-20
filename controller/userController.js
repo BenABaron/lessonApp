@@ -22,7 +22,7 @@ let createUser = function(req, res){
   let confirm_password = req.body.confirm_password;
 
   if (password != confirm_password) {
-    res.sendStatus(400).send("Passwords do not match");
+    res.status(400).send("Passwords do not match");
   }
 
   let passwordHash = bcrypt.hashSync(password, saltRounds);
@@ -79,7 +79,7 @@ let loginUser = function(req, res){
   let email = req.body.email;
   let password = req.body.password;
 
-  let sqlStmt = `select users.email, users.pass_hash, roles.description
+  let sqlStmt = `select users.email, users.pass_hash, users.user_id, roles.description
   from users
   join user_roles 
   on users.user_id = user_roles.user_id
@@ -91,6 +91,7 @@ let loginUser = function(req, res){
 
     let goodPassword = false;
     let role;
+    let id;
 
     if (err) {
       console.error("Error when querying the db. Error: ", err);
@@ -111,24 +112,41 @@ let loginUser = function(req, res){
 
       role = row.description;
 
+      id = row.user_id;
+
       goodPassword = bcrypt.compareSync(password, hash);
     }
 
     if (goodPassword) {
       const unsignedToken = {
         email: email,
-        role: role
+        role: role,
+        id: id
       };
 
       const accessToken = jwt.sign(unsignedToken, jwtSecret);
       
       res.json(accessToken);
     } else {
-      res.sendStatus(401).send("Unauthorized!");
+      res.status(401).send("Unauthorized!");
     }
 
 
   })
 }
 
-module.exports = {createUser, loginUser};
+let getAllUsers = () => {
+  console.log('Inside my getAllUsers /GET function');
+
+  let sqlStmt = 'select * from users';
+
+  connection.query(sqlStmt, function(err, rows) {
+    if (err) {
+      console.error("Error when querying the db. Error: ", err)
+    }
+
+    res.json(rows);
+  })
+}
+
+module.exports = {createUser, loginUser, getAllUsers};

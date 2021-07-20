@@ -18,7 +18,7 @@ let requestLesson = function(req, res){
     let end_date = req.body.end_date;
     let start_time = req.body.start_time;
     let end_time = req.body.end_time;
-    let is_recurring = req.body.is_recurring
+    let is_recurring = req.body.is_recurring;
 
     let params = [];
     params.push(student_id);

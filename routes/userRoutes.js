@@ -11,5 +11,8 @@ router.post('/createUser', [checks.checkJwt, checks.isAdmin], controller.createU
 // Login - POST
 router.post('/login', controller.loginUser);
 
+// Get All Users - GET
+router.get('/getAllUsers', controller.getAllUsers)
+
 
 module.exports = router;

@@ -9,7 +9,7 @@ let isAdmin = function(req, res, next) {
   if (req.isAdmin) {
     next();
   } else {
-    res.sendStatus(401).send("Unauthorized");
+    res.status(401).send("Unauthorized");
   }
 };
 
@@ -18,7 +18,7 @@ let isTeacher = function(req, res, next) {
   if (req.isTeacher) {
     next();
   } else {
-    res.sendStatus(401).send("Unauthorized");
+    res.status(401).send("Unauthorized");
   }
 };
 
@@ -27,7 +27,7 @@ let isStudent = function(req, res, next) {
   if (req.isStudent) {
     next();
   } else {
-    res.sendStatus(401).send("Unauthorized");
+    res.status(401).send("Unauthorized");
   }
 };
 
@@ -56,6 +56,7 @@ let checkJwt = function(req, res, next) {
     // assign values to be included in the token, namely the email and the role
     console.log(decoded);
     req.email = decoded.email;
+    req.user_id = decoded.id;
     if (decoded.role == 'admin') {
       req.isAdmin = 'admin';
     } else if (decoded.role == 'teacher') {
