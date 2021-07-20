@@ -135,17 +135,24 @@ let loginUser = function(req, res){
   })
 }
 
-let getAllUsers = () => {
+let getAllUsers = (req, res) => {
   console.log('Inside my getAllUsers /GET function');
 
-  let sqlStmt = 'select * from users';
+  let sqlStmt = `select users.user_id, users.first_name, users.last_name, users.email, roles.description
+  from users
+  join user_roles
+  on users.user_id = user_roles.user_id
+  join roles
+  on user_roles.role_id = roles.role_id`;
 
   connection.query(sqlStmt, function(err, rows) {
     if (err) {
       console.error("Error when querying the db. Error: ", err)
+      res.sendStatus(500);
+    } else {
+      res.json(rows);
     }
 
-    res.json(rows);
   })
 }
 
